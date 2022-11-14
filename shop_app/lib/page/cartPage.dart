@@ -60,16 +60,16 @@ class CartPage extends StatelessWidget {
               onPressed: () {},
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.deepOrange,
-                fixedSize: Size(size.width * 0.6, 30),
+                fixedSize: Size(size.width, 50),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50)),
               ),
               child: const Text(
-                'Sign Up ',
+                'Next ',
                 style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 18,
                     color: Colors.white,
-                    fontWeight: FontWeight.w400),
+                    fontWeight: FontWeight.bold),
               )),
         ]),
       ),
@@ -77,9 +77,40 @@ class CartPage extends StatelessWidget {
   }
 
   Widget buildCardItems(BuildContext context) {
-    return const Center(
+    /*return const Center(
       child: Text('Card Is Empty',
           style: TextStyle(color: Colors.white, fontSize: 18)),
+    );*/
+    return buildCardItem(context);
+  }
+
+  Widget buildCardItem(BuildContext context) {
+    return ListTile(
+      leading: const CircleAvatar(
+        backgroundImage: AssetImage('assets/imgs/ananas.jpg'),
+      ),
+      title: Row(
+          //   mainAxisAlignment: MainAxisAlignment,
+          children: const [
+            Text(
+              ('1x'),
+              style: TextStyle(color: Colors.white),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              'Ananas',
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+            )
+          ]),
+      trailing: const Text(
+        '\$50.0',
+        style: TextStyle(color: Colors.white),
+      ),
     );
   }
 }

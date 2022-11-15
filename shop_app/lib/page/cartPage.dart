@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/model/cart_item.dart';
+import 'package:shop_app/provider/shop_provider.dart';
+import 'package:provider/provider.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -35,7 +38,6 @@ class CartPage extends StatelessWidget {
           ),
           Expanded(
               child: Container(
-            color: Colors.green,
             child: buildCardItems(context),
           )),
           const SizedBox(
@@ -46,7 +48,7 @@ class CartPage extends StatelessWidget {
             children: const [
               Text('Total : ',
                   style: TextStyle(color: Colors.white, fontSize: 20)),
-              Text('\$80',
+              Text('\$80.00',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 32,
@@ -77,39 +79,45 @@ class CartPage extends StatelessWidget {
   }
 
   Widget buildCardItems(BuildContext context) {
-    /*return const Center(
-      child: Text('Card Is Empty',
-          style: TextStyle(color: Colors.white, fontSize: 18)),
-    );*/
-    return buildCardItem(context);
+    final provider = Provider.of<ShopProvider>(context);
+    if (provider.items.isEmpty) {
+      return const Center(
+        child: Text('Card Is Empty',
+            style: TextStyle(color: Colors.white, fontSize: 18)),
+      );
+    } else {
+      return ListView(
+        children: provider.items.values.map(buildCardItem).toList(),
+      );
+    }
   }
 
-  Widget buildCardItem(BuildContext context) {
+  Widget buildCardItem(CartItem cartItem) {
     return ListTile(
-      leading: const CircleAvatar(
-        backgroundImage: AssetImage('assets/imgs/ananas.jpg'),
+      leading: CircleAvatar(
+        backgroundImage: AssetImage(cartItem.imageUrl),
       ),
       title: Row(
           //   mainAxisAlignment: MainAxisAlignment,
-          children: const [
+          children: [
             Text(
-              ('1x'),
-              style: TextStyle(color: Colors.white),
+              ('${cartItem.quantity}x'),
+              style: const TextStyle(color: Colors.white),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Text(
-              'Ananas',
-              style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+              cartItem.title,
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.white),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
             )
           ]),
-      trailing: const Text(
-        '\$50.0',
-        style: TextStyle(color: Colors.white),
+      trailing: Text(
+        '\$${cartItem.price}',
+        style: const TextStyle(color: Colors.white),
       ),
     );
   }

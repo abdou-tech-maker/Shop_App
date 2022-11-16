@@ -6,6 +6,7 @@ class CartItem {
   final int quantity;
   final String imageUrl;
   final double price;
+  final String content;
 
   const CartItem({
     required this.id,
@@ -13,6 +14,7 @@ class CartItem {
     required this.quantity,
     required this.imageUrl,
     required this.price,
+    required this.content,
   });
 
   CartItem copy({
@@ -23,9 +25,10 @@ class CartItem {
     required double price,
   }) =>
       CartItem(
-          id: id ?? this.id,
-          title: title ?? this.title,
-          quantity: quantity ?? this.quantity,
-          imageUrl: imageUrl ?? this.imageUrl,
-          price: price ?? this.price);
+          id: id,
+          title: title,
+          quantity: quantity,
+          imageUrl: imageUrl,
+          price: price,
+          content: content);
 }

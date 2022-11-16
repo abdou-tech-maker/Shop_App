@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/page/cartPage.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app/page/productPage.dart';
 import 'package:shop_app/provider/shop_provider.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData(
             primaryColor: Colors.deepOrange, primaryColorDark: Colors.white),
-        home: const CartPage(),
+        home: const ProductPage(),
       ),
     );
   }
